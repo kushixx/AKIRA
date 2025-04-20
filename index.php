@@ -50,11 +50,28 @@ include 'db/dbconnect.php';
             <div class="sidebar-heading">
                 Addons
             </div>  
+
             <li class="nav-item">
-                <a class="nav-link" href="Record.php">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecord"
+                    aria-expanded="true" aria-controls="collapseRecord">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Record</span></a>
+                    <span>Record</span>
+                </a>
+                <div id="collapseRecord" class="collapse"  aria-labelledby="headingRecord" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="Record.php">Category/Brand</a>
+                        <a class="collapse-item" href="Product.php">Product</a>
+                        <!-- Add more items here as needed -->
+                    </div>
+                </div>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="cashier.php">
+                    <i class="fas fa-solid fa-users"></i>
+                    <span>Cashier</span></a>
+            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="Stock.php">
                     <i class="fas fa-fw fa-table"></i>
@@ -65,11 +82,7 @@ include 'db/dbconnect.php';
                     <i class="fas fa-solid fa-users"></i>
                     <span>Users</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="cashier.php">
-                    <i class="fas fa-solid fa-users"></i>
-                    <span>Cashier</span></a>
-            </li>
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->

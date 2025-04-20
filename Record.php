@@ -1,7 +1,10 @@
         <?php
+        
         include 'db/db_con.php';
         session_start();
-
+        $sql = "SELECT * FROM products";
+        $result_prod = $con->query($sql);
+        
         $sql_brand = "SELECT * FROM brands";
         $result_brand = $con->query($sql_brand);
 
@@ -155,7 +158,8 @@
                 exit(0);
             }
         }
-?>
+        ?>
+
         <!-- DELETE CATEGORY MODAL -->
         <div class="modal fade" id="modal_delete_cat" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -388,41 +392,69 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">AKIRASAN</div>
             </a>
+
             <hr class="sidebar-divider my-0">
+
             <li class="nav-item">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Dashboard</span>
+                </a>
             </li>
+
             <hr class="sidebar-divider">
+
             <div class="sidebar-heading">
                 Addons
             </div>
+
+            <!-- DROPDOWN -->
             <li class="nav-item active">
-                <a class="nav-link" href="Record.php">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecord"
+                    aria-expanded="true" aria-controls="collapseRecord">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Record</span></a>
+                    <span>Record</span>
+                </a>
+                <div id="collapseRecord" class="collapse show"  aria-labelledby="headingRecord" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item active" href="Record.php">Category/Brand</a>
+                        <a class="collapse-item" href="Product.php">Product</a>
+                        <!-- Add more items here as needed -->
+                    </div>
+                </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Stock.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Stock</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="users.php">
-                    <i class="fas fa-solid fa-users"></i>
-                    <span>Users</span></a>
-            </li>
+            <!-- DROPDOWN -->
+
             <li class="nav-item">
                 <a class="nav-link" href="Cashier.php">
                     <i class="fas fa-solid fa-users"></i>
-                    <span>Cashier</span></a>
+                    <span>Cashier</span>
+                </a>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="Stock.php">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Stock</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="users.php">
+                    <i class="fas fa-solid fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+
+            
+
             <hr class="sidebar-divider d-none d-md-block">
+
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
         </ul>
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -434,8 +466,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Manage Products</h1>
-                    <hr>
+                    <h1 class="h3 m-0 mb-2 text-gray-800">Brand | Category</h1>
 
                     <!-- ALERTS ROW -->
                     <div class="row">
@@ -456,11 +487,11 @@
                     <!-- TABLES -->
                     <div class="row">
                         <!-- CAT TABLE -->
-                        <div class="col-xl-6 col-lg-12">
+                        <div class="col-xl-6 col-lg-12"> 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <button type="button" class="btn mb-1 btn-add mt-1" style="background-color: #00246B; color:#ffffff;" data-bs-toggle="modal" data-bs-target="#modal_cat">
-                                        Add Category
+                                        Record Category
                                     </button>
                                 </div>
                                 <div class="card-body">
@@ -468,9 +499,9 @@
                                         <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th style="width: 50px;">ID</th>
                                                     <th>Category Name</th>
-                                                    <th>Action</th>
+                                                    <th style="width: 150px;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
@@ -488,14 +519,14 @@
                                                             echo "<td>" . $row["id"] . "</td>";
                                                             echo "<td>" . $row["category_name"] . "</td>";
                                                             echo "<td>
-                                                                    <button class='btn btn-primary edit-btn'
+                                                                    <button class='btn btn-primary btn-sm edit-btn'
                                                                             data-id='" . $row["id"] . "'
                                                                             data-cat='" . $row["category_name"] . "'
                                                                             data-bs-toggle='modal'
                                                                             data-bs-target='#modal_edit_cat'>
                                                                         EDIT
                                                                     </button>
-                                                                    <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#modal_delete_cat'
+                                                                    <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#modal_delete_cat'
                                                                     data-cat-id='{$row['id']}'>DELETE</button>
                                                                 </td>";
                                                             echo "</tr>";
@@ -515,7 +546,7 @@
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <button type="button" class="btn btn-add mt-1 mb-1" style="background-color: #00246B; color:#ffffff;" data-bs-toggle="modal" data-bs-target="#modal_brand">
-                                        Add Brand
+                                        Record Brand
                                     </button>
                                 </div>
                                 <div class="card-body">
@@ -523,9 +554,9 @@
                                         <table class="table table-bordered" id="brandsTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th style="width: 50px;">ID</th>
                                                     <th>Brand Name</th>
-                                                    <th>Action</th>
+                                                    <th style="width: 150px;" >Action</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
@@ -543,14 +574,14 @@
                                                             echo "<td>" . $row["id"] . "</td>";
                                                             echo "<td>" . $row["brand_name"] . "</td>";
                                                             echo "<td>
-                                                                    <button class='btn btn-primary edit-btn'
+                                                                    <button class='btn btn-primary btn-sm edit-btn'
                                                                         data-id='" . $row["id"] . "'
                                                                         data-brand='" . $row["brand_name"] . "'
                                                                         data-bs-toggle='modal'
                                                                         data-bs-target='#modal_edit'>
                                                                         EDIT
                                                                     </button>
-                                                                    <button class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#modal_delete_brand' 
+                                                                    <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#modal_delete_brand' 
                                                                         data-brand-id='{$row['id']}'>DELETE</button>
                                                                 </td>";
                                                             echo "</tr>";
@@ -565,9 +596,9 @@
                                 </div>
                             </div>
                         </div>
-
                         
                     </div>
+                    <!-- END TABLES -->
                 </div>
             </div>
         </div>

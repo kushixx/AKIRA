@@ -16,14 +16,12 @@ $result = $con->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Cashier</title>
-
-    <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="cashier.css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <title>Cashier</title>
 </head>
 
 <body id="page-top">
@@ -58,14 +56,30 @@ $result = $con->query($sql);
             <div class="sidebar-heading">
                 Addons
             </div>
+
             <li class="nav-item">
-                <a class="nav-link" href="Record.php">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecord"
+                    aria-expanded="true" aria-controls="collapseRecord">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Record</span></a>
+                    <span>Record</span>
+                </a>
+                <div id="collapseRecord" class="collapse"  aria-labelledby="headingRecord" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item " href="Record.php">Category/Brand</a>
+                        <a class="collapse-item" href="Product.php">Product</a>
+                        <!-- Add more items here as needed -->
+                    </div>
+                </div>
             </li>
-            <!-- Products Tables -->
+
+            <li class="nav-item active">
+                <a class="nav-link" href="Cashier.php">
+                    <i class="fas fa-solid fa-users"></i>
+                    <span>Cashier</span></a>
+            </li>
+
             <li class="nav-item ">
-                <a class="nav-link" href="edit_product.php">
+                <a class="nav-link" href="stock.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Stock</span></a>
             </li>
@@ -76,11 +90,6 @@ $result = $con->query($sql);
                     <span>Users</span></a>
             </li>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="Cashier.php">
-                    <i class="fas fa-solid fa-users"></i>
-                    <span>Cashier</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
