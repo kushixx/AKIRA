@@ -395,7 +395,7 @@ if (isset($_POST['prod_id'])) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="Record.php">Category/Brand</a>
                         <a class="collapse-item" href="Product.php">Product</a>
-                        <!-- Add more items here as needed -->
+                        <a class="collapse-item" href="User.php">User</a>
                     </div>
                 </div>
             </li>
@@ -411,12 +411,6 @@ if (isset($_POST['prod_id'])) {
                 <a class="nav-link" href="Stock.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Stock</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="users.php">
-                    <i class="fas fa-solid fa-users"></i>
-                    <span>Users</span>
                 </a>
             </li>
             
@@ -450,7 +444,6 @@ if (isset($_POST['prod_id'])) {
                         <div class="col-xl-4 col-lg-5">
                             <?php include('alert_success.php'); ?>
                             <?php include('alert_fail.php'); ?>
-                            
                         </div>
                         <!-- Table -->
                         <div class="col-xl-12 col-lg-12">
@@ -498,7 +491,7 @@ if (isset($_POST['prod_id'])) {
                                                         echo "<td>" . $row["price"] . "</td>";
                                                         echo "<td>" . $row["quantity"] . "</td>";
                                                         echo "<td>
-                                                                <button class='btn btn-primary edit-btn' 
+                                                                <button class='btn btn-primary edit-btn btn-sm' 
                                                                     data-id='" . $row["prod_id"] . "' 
                                                                     data-code='" . $row["prod_code"] . "' 
                                                                     data-cat='" . $row["category_id"] . "'
@@ -510,7 +503,7 @@ if (isset($_POST['prod_id'])) {
                                                                     data-bs-target='#modal_edit'>
                                                                     EDIT
                                                                 </button>
-                                                                <button class='btn btn-danger' data-bs-toggle='modal'data-bs-target='#modal_delete'
+                                                                <button class='btn btn-danger btn-sm' data-bs-toggle='modal'data-bs-target='#modal_delete'
                                                                 data-prod-id='{$row['prod_id']}'>DELETE</button>
                                                             </td>";
                                                         echo "</tr>";

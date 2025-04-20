@@ -408,7 +408,6 @@
                 Addons
             </div>
 
-            <!-- DROPDOWN -->
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecord"
                     aria-expanded="true" aria-controls="collapseRecord">
@@ -419,11 +418,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item active" href="Record.php">Category/Brand</a>
                         <a class="collapse-item" href="Product.php">Product</a>
-                        <!-- Add more items here as needed -->
+                        <a class="collapse-item" href="User.php">User</a>
                     </div>
                 </div>
             </li>
-            <!-- DROPDOWN -->
+            
 
             <li class="nav-item">
                 <a class="nav-link" href="Cashier.php">
@@ -431,22 +430,21 @@
                     <span>Cashier</span>
                 </a>
             </li>
-            
+
             <li class="nav-item">
-                <a class="nav-link" href="Stock.php">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvent"
+                    aria-expanded="true" aria-controls="collapseRecord">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Stock</span>
+                    <span>Inventory</span>
                 </a>
+                <div id="collapseInvent" class="collapse"  aria-labelledby="headingInvent" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="ProductManagement.php">Product Management</a>
+                        <a class="collapse-item" href="StockLevel.php">Monitor Stock Level</a>
+                        <a class="collapse-item" href="PurchaseOrder.php">Purchase Order</a>
+                    </div>
+                </div>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="users.php">
-                    <i class="fas fa-solid fa-users"></i>
-                    <span>Users</span>
-                </a>
-            </li>
-
-            
 
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -467,7 +465,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <h1 class="h3 m-0 mb-2 text-gray-800">Brand | Category</h1>
-
+                    <hr>
                     <!-- ALERTS ROW -->
                     <div class="row">
                         <div class="col-xl-6 col-lg-5">

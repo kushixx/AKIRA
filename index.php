@@ -61,7 +61,7 @@ include 'db/dbconnect.php';
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="Record.php">Category/Brand</a>
                         <a class="collapse-item" href="Product.php">Product</a>
-                        <!-- Add more items here as needed -->
+                        <a class="collapse-item" href="User.php">User</a>
                     </div>
                 </div>
             </li>
@@ -71,16 +71,20 @@ include 'db/dbconnect.php';
                     <i class="fas fa-solid fa-users"></i>
                     <span>Cashier</span></a>
             </li>
-            
+
             <li class="nav-item">
-                <a class="nav-link" href="Stock.php">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvent"
+                    aria-expanded="true" aria-controls="collapseRecord">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Stock</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="users.php">
-                    <i class="fas fa-solid fa-users"></i>
-                    <span>Users</span></a>
+                    <span>Inventory</span>
+                </a>
+                <div id="collapseInvent" class="collapse"  aria-labelledby="headingInvent" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="ProductManagement.php">Product Management</a>
+                        <a class="collapse-item" href="StockLevel.php">Monitor Stock Level</a>
+                        <a class="collapse-item" href="PurchaseOrder.php">Purchase Order</a>
+                    </div>
+                </div>
             </li>
             
             <!-- Divider -->

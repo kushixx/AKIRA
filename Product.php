@@ -1,7 +1,8 @@
 <?php
-        
 include 'db/db_con.php';
-session_start();$sql = "SELECT * FROM products";
+session_start();
+
+$sql = "SELECT * FROM products";
 $result = $con->query($sql);
         
         // ADD PRODUCT
@@ -16,7 +17,7 @@ $result = $con->query($sql);
             
                 if (empty($prod_code) || empty($category_name) || empty($brand_name) || empty($Product_name) || empty($price) || empty($quantity)) {
                     $_SESSION['alert-fail'] = "All fields are required.";
-                    header("Location: Stock.php");
+                    header("Location: Product.php");
                     exit(0);
                 }
             
@@ -25,7 +26,7 @@ $result = $con->query($sql);
             
                 if ($check_code_result->num_rows > 0) {
                     $_SESSION['alert-fail'] = "Product already exists.";
-                    header("Location: Stock.php");
+                    header("Location: Product.php");
                     exit(0);
                 } else {
                     $get_category_id_sql = "SELECT id FROM categories WHERE category_name = '$category_name'";
@@ -62,7 +63,7 @@ $result = $con->query($sql);
                         }
                     } else {
                         $_SESSION['alert-fail'] = "Category not found.";
-                        header("Location: Stock.php");
+                        header("Location: Product.php");
                         exit(0);
                     }
                 }
@@ -87,11 +88,11 @@ $result = $con->query($sql);
         
                     if ($con->query($sql) === TRUE) {
                         $_SESSION['message'] = "Product successfully edited.";
-                        header("Location: Stock.php");
+                        header("Location: Product.php");
                         exit(0);
                     } else {
                         $_SESSION['alert-fail'] = "Error editing product.";
-                        header("Location: Stock.php");
+                        header("Location: Product.php");
                         exit(0);
                     }
             }
@@ -116,11 +117,11 @@ $result = $con->query($sql);
         
             if ($delete_query) {
                 $_SESSION['message'] = " Product deleted successfully";
-                header("Location: Stock.php");
+                header("Location: Product.php");
                 exit(0);
             } else {
                 $_SESSION['alert-fail'] = "Error deleting product";
-                header("Location: Stock.php");
+                header("Location: Product.php");
                 exit(0);
             }
         }
@@ -161,7 +162,7 @@ $result = $con->query($sql);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Stock.php" method="POST">
+                    <form action="Product.php" method="POST">
                         <div class="mb-3">
                             <input type="text" class="form-control" id="prod_id" name="prod_id" hidden>
                             <label for="prod_code" class="form-label">Product code:</label>
@@ -230,7 +231,7 @@ $result = $con->query($sql);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="Stock.php" method="POST">
+                    <form action="Product.php" method="POST">
                         <input type="hidden" id="edit_id" name="prod_id">
                         <div class="mb-3">
                             <label for="edit_code" class="form-label">Product Code:</label>
@@ -335,7 +336,7 @@ $result = $con->query($sql);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form method="POST" action="Stock.php">
+                    <form method="POST" action="Product.php">
                         <input type="hidden" id="delete_id" name="prod_id" value="">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
@@ -393,7 +394,7 @@ $result = $con->query($sql);
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item " href="Record.php">Category/Brand</a>
                         <a class="collapse-item active" href="Product.php">Product</a>
-                        <!-- Add more items here as needed -->
+                        <a class="collapse-item" href="User.php">User</a>
                     </div>
                 </div>
             </li>
@@ -407,17 +408,18 @@ $result = $con->query($sql);
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="Stock.php">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvent"
+                    aria-expanded="true" aria-controls="collapseRecord">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Stock</span>
+                    <span>Inventory</span>
                 </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="users.php">
-                    <i class="fas fa-solid fa-users"></i>
-                    <span>Users</span>
-                </a>
+                <div id="collapseInvent" class="collapse"  aria-labelledby="headingInvent" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="ProductManagement.php">Product Management</a>
+                        <a class="collapse-item" href="StockLevel.php">Monitor Stock Level</a>
+                        <a class="collapse-item" href="PurchaseOrder.php">Purchase Order</a>
+                    </div>
+                </div>
             </li>
 
             <hr class="sidebar-divider d-none d-md-block">
@@ -439,31 +441,23 @@ $result = $con->query($sql);
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <h1 class="h3 m-0 mb-2 text-gray-800">Product</h1>
-
+                    <hr>
                     <!-- ALERTS ROW -->
                     <div class="row">
-                        <div class="col-xl-6 col-lg-5">
-                            <div class="alerts d-flex justify-content-center">
-                                <?php include('alert_fail_cat.php'); ?>
-                                <?php include('alert_success_cat.php'); ?>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-5">
-                            <div class="alerts d-flex justify-content-center">
-                                <?php include('alert_fail_brand.php'); ?>
-                                <?php include('alert_success_brand.php'); ?>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <!-- TABLES -->
-                    <div class="row">
-                        <!-- BRAND TABLE -->
+                    <div class="row justify-content-center">
+                        <div class="col-xl-4 col-lg-5">
+                            <?php include('alert_success.php'); ?>
+                            <?php include('alert_fail.php'); ?>
+                        </div>
                         <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <button type="button" class="btn btn-add mt-1 mb-1" style="background-color: #00246B; color:#ffffff;"
-                                     data-bs-toggle="modal" data-bs-target="#prod_modal">
+                                        data-bs-toggle="modal" data-bs-target="#prod_modal">
                                         Record Product
                                     </button>
                                 </div>
@@ -507,7 +501,7 @@ $result = $con->query($sql);
                                                         echo "<td>" . $row["price"] . "</td>";
                                                         echo "<td>" . $row["quantity"] . "</td>";
                                                         echo "<td>
-                                                                <button class='btn btn-primary edit-btn' 
+                                                                <button class='btn btn-primary edit-btn btn-sm' 
                                                                     data-id='" . $row["prod_id"] . "' 
                                                                     data-code='" . $row["prod_code"] . "' 
                                                                     data-cat='" . $row["category_id"] . "'
@@ -519,7 +513,7 @@ $result = $con->query($sql);
                                                                     data-bs-target='#modal_edit'>
                                                                     EDIT
                                                                 </button>
-                                                                <button class='btn btn-danger' data-bs-toggle='modal'data-bs-target='#modal_delete'
+                                                                <button class='btn btn-danger btn-sm' data-bs-toggle='modal'data-bs-target='#modal_delete'
                                                                 data-prod-id='{$row['prod_id']}'>DELETE</button>
                                                             </td>";
                                                         echo "</tr>";
@@ -552,12 +546,6 @@ $result = $con->query($sql);
         <script src="vendor/datatables/jquery.dataTables.min.js"></script>
         <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
         <script src="js/demo/datatables-demo.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#brandsTable').DataTable();
-                $('#categoriesTable').DataTable();
-            });
-        </script>
     </div>
 </body>
 

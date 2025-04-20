@@ -67,7 +67,7 @@ $result = $con->query($sql);
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item " href="Record.php">Category/Brand</a>
                         <a class="collapse-item" href="Product.php">Product</a>
-                        <!-- Add more items here as needed -->
+                        <a class="collapse-item" href="User.php">User</a>
                     </div>
                 </div>
             </li>
@@ -78,16 +78,19 @@ $result = $con->query($sql);
                     <span>Cashier</span></a>
             </li>
 
-            <li class="nav-item ">
-                <a class="nav-link" href="stock.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Stock</span></a>
-            </li>
-
             <li class="nav-item">
-                <a class="nav-link" href="users.php">
-                    <i class="fas fa-solid fa-users"></i>
-                    <span>Users</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvent"
+                    aria-expanded="true" aria-controls="collapseRecord">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Inventory</span>
+                </a>
+                <div id="collapseInvent" class="collapse"  aria-labelledby="headingInvent" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="ProductManagement.php">Product Management</a>
+                        <a class="collapse-item" href="StockLevel.php">Monitor Stock Level</a>
+                        <a class="collapse-item" href="PurchaseOrder.php">Purchase Order</a>
+                    </div>
+                </div>
             </li>
 
 
@@ -114,54 +117,7 @@ $result = $con->query($sql);
                     <!-- Page Heading -->
                     <div class="row ">
                         <div class="col-xl-8 col-lg-12">
-                            <div class="cashier-container">
-                                <h1>Cashier Interface</h1>
-                                <div class="scan-area">
-                                    <label for="barcode">Scan Product Barcode:</label>
-                                    <input type="text" id="barcode" autofocus placeholder="Scan Barcode..." autocomplete="off">
-                                </div>
-
-                                <div id="quantity-container" class="hidden">
-                                    <label for="quantity">Enter Quantity:</label>
-                                    <input type="number" id="quantity" min="1" value="1">
-                                </div>
-
-                                <div id="product-info" class="hidden">
-                                    <p>Product: <span id="product-name"></span></p>
-                                    <p>Price: $<span id="product-price"></span></p>
-                                </div>
-
-                                <div class="actions">
-                                    <button id="add-to-cart" class="hidden">Add to Cart</button>
-                                </div>
-
-                                <!-- Cart and Checkout Form -->
-                                <form action="db/dbconnect.php" method="POST" id="checkout-form">
-                                    <div class="cart">
-                                        <h2>Shopping Cart</h2>
-                                        <table id="cart-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price per Item</th>
-                                                    <th>Total Cost</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="cart-body">
-                                                <!-- Cart items will be dynamically inserted here -->
-                                            </tbody>
-                                        </table>
-                                        <div class="total-cost">
-                                            <strong>Total: $<span id="grand-total">0.00</span></strong>
-                                        </div>
-                                    </div>
-                                    <!-- Hidden input to store cart data -->
-                                    <input type="hidden" name="cart" id="cart-data">
-                                    <button type="submit">Checkout</button>
-                                </form>
-                            </div>
+                            
                         </div>
                         
                         <div class="col-xl-4 col-lg-5">
