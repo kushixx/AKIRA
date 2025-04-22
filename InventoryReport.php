@@ -83,13 +83,13 @@ include 'db/dbconnect.php';
                     <span>Cashier</span></a>
             </li>
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvent"
                     aria-expanded="true" aria-controls="collapseRecord">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Inventory</span>
                 </a>
-                <div id="collapseInvent" class="collapse show"  aria-labelledby="headingInvent" data-parent="#accordionSidebar">
+                <div id="collapseInvent" class="collapse"  aria-labelledby="headingInvent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item active" href="ProductManagement.php">Product Management</a>
                         <a class="collapse-item" href="StockLevel.php">Monitor Stock Level</a>
@@ -97,6 +97,22 @@ include 'db/dbconnect.php';
                     </div>
                 </div>
             </li>
+
+            <li class="nav-item active">
+                <a class="nav-link collapsed " href="#" data-toggle="collapse" data-target="#collapseReport"
+                    aria-expanded="true" aria-controls="collapseRecord">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Reports</span>
+                </a>
+                <div id="collapseReport" class="collapse show"  aria-labelledby="headingInvent" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="SalesReport.php">Sales Report</a>
+                        <a class="collapse-item active" href="InventoryReport.php">Inventory eport </a>
+                        <a class="collapse-item " href="StockLevelReport.php">Stock Level Report</a>
+                        <a class="collapse-item" href="PurchaseOrderReport.php">Purchase Order Report</a>
+                    </div>
+                </div>
+            </li>  
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

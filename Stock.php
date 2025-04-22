@@ -410,7 +410,7 @@ if (isset($_POST['prod_id'])) {
             <li class="nav-item active">
                 <a class="nav-link" href="Stock.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Stock</span>
+                    <span>In</span>
                 </a>
             </li>
             
