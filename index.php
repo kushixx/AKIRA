@@ -95,7 +95,7 @@ include 'db/dbconnect.php';
                 </a>
                 <div id="collapseReport" class="collapse"  aria-labelledby="headingInvent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="SalesReport.php">Sales Report</a>
+                        <a class="collapse-item" href="report/SalesReport.php">Sales Report</a>
                         <a class="collapse-item" href="InventoryReport.php">Inventory eport </a>
                         <a class="collapse-item" href="StockLevelReport.php">Stock Level Report</a>
                         <a class="collapse-item" href="PurchaseOrderReport.php">Purchase Order Report</a>
