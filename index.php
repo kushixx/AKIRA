@@ -149,7 +149,7 @@ include 'db/dbconnect.php';
 
                         <!-- products -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="Stock.php" style="text-decoration: none;">
+                            <a href="ProductManagement.php" style="text-decoration: none;">
                                 <div class="card border-left-dark shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -169,7 +169,7 @@ include 'db/dbconnect.php';
 
                         <!-- users -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href="users.php" style="text-decoration: none;">
+                            <a href="user.php" style="text-decoration: none;">
                                 <div class="card border-left-danger shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">

@@ -153,7 +153,7 @@ $result = $con->query($sql);
 <body id="page-top">
 
    <!-- ADD MODAL -->
-   <div class="modal fade" id="prod_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+    <div class="modal fade" id="prod_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-light">
@@ -221,7 +221,7 @@ $result = $con->query($sql);
             </div>
         </div>
     </div>
-
+                                
     <!-- EDIT MODAL -->
     <div class="modal fade" id="modal_edit" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">

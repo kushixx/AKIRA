@@ -168,6 +168,48 @@ $result = $con->query($sql);
 
         <script src="cashier.js"></script>
 
+        <script>
+            document.getElementById('add-item').addEventListener('click', function() {
+                var itemDiv = document.createElement('div');
+                itemDiv.className = 'form-group item';
+                itemDiv.style.border = "1px solid #ddd";
+                itemDiv.style.padding = "10px";
+                itemDiv.innerHTML = `
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-th-large"></i>
+                        </span>
+                        <input type="text" class="form-control" name="item-name[]" placeholder="Item Name">
+                    </div>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                        </span>
+                        <input type="number" class="form-control" name="quantity[]" placeholder="Quantity">
+                    </div>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-scale"></i>
+                        </span>
+                        <input type="text" class="form-control" name="unit[]" placeholder="Unit">
+                    </div>
+                    <div class="input-group" style="margin-top: 10px;">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-usd"></i>
+                        </span>
+                        <input type="number" step="0.01" class="form-control" name="unit_cost[]" placeholder="Unit Cost">
+                    </div>
+                    <button type="button" class="btn btn-danger remove-item" style="margin-top: 10px;">Remove</button>
+                `;
+
+                document.getElementById('items').appendChild(itemDiv);
+
+                // Add event listener to remove button
+                itemDiv.querySelector('.remove-item').addEventListener('click', function() {
+                    itemDiv.remove();
+                });
+            });
+            </script>
     </div>
 </body>
 
