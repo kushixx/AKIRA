@@ -1,7 +1,12 @@
 <?php
 include 'db/db_con.php';
-session_start();
 
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if the user is not logged in
+    header("Location: login.php");
+    exit();
+}
 $sql = "SELECT * FROM products";
 $result = $con->query($sql);
         
@@ -29,12 +34,12 @@ $result = $con->query($sql);
                     header("Location: Product.php");
                     exit(0);
                 } else {
-                    $get_category_id_sql = "SELECT id FROM categories WHERE category_name = '$category_name'";
+                    $get_category_id_sql = "SELECT cat_id FROM categories WHERE category_name = '$category_name'";
                     $category_id_result = $con->query($get_category_id_sql);
             
                     if ($category_id_result->num_rows > 0) {
                         $row_category = $category_id_result->fetch_assoc();
-                        $category_id = $row_category['id'];
+                        $category_id = $row_category['cat_id'];
             
                         $get_brand_id_sql = "SELECT id FROM brands WHERE brand_name = '$brand_name'";
                         $brand_id_result = $con->query($get_brand_id_sql);
@@ -459,9 +464,7 @@ $result = $con->query($sql);
                     <h1 class="h3 m-0 mb-2 text-gray-800">Product</h1>
                     <hr>
                     <!-- ALERTS ROW -->
-                    <div class="row">
-                        
-                    </div>
+                    
 
                     <!-- TABLES -->
                     <div class="row justify-content-center">
@@ -511,7 +514,7 @@ $result = $con->query($sql);
                                                         echo "<tr class='text-center text-uppercase'>";
                                                         echo "<td>" . $row["prod_id"] . "</td>";
                                                         echo "<td>" . $row["prod_code"] . "</td>";
-                                                        echo "<td>" . $row["category_id"] . "</td>";
+                                                        echo "<td>" . $row["cat_id"] . "</td>";
                                                         echo "<td>" . $row["brand_id"] . "</td>";
                                                         echo "<td>" . $row["name"] . "</td>";
                                                         echo "<td>" . $row["price"] . "</td>";
@@ -520,7 +523,7 @@ $result = $con->query($sql);
                                                                 <button class='btn btn-primary edit-btn btn-sm' 
                                                                     data-id='" . $row["prod_id"] . "' 
                                                                     data-code='" . $row["prod_code"] . "' 
-                                                                    data-cat='" . $row["category_id"] . "'
+                                                                    data-cat='" . $row["cat_id"] . "'
                                                                     data-brand='" . $row["brand_id"] . "' 
                                                                     data-name='" . $row["name"] . "' 
                                                                     data-price='" . $row["price"] . "' 

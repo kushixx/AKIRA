@@ -2,6 +2,12 @@
         
         include 'db/db_con.php';
         session_start();
+
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: login.php");
+            exit();
+        }
+
         $sql = "SELECT * FROM products";
         $result_prod = $con->query($sql);
         
@@ -71,7 +77,7 @@
         if (isset($_POST['cat_id'])) {
             $cat_id = mysqli_real_escape_string($con, $_POST['cat_id']);
 
-            $sql = "DELETE FROM categories WHERE id = $cat_id";
+            $sql = "DELETE FROM categories WHERE cat_id = $cat_id";
             $delete_query = mysqli_query($con, $sql);
 
             if ($delete_query) {
@@ -145,7 +151,7 @@
         if (isset($_POST['brand_id'])) {
             $brand_id = mysqli_real_escape_string($con, $_POST['brand_id']);
 
-            $sql = "DELETE FROM brands WHERE id = $brand_id";
+            $sql = "DELETE FROM brands WHERE brand_id = $brand_id";
             $delete_query = mysqli_query($con, $sql);
 
             if ($delete_query) {
@@ -174,7 +180,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <form method="POST" action="record.php">
-                            <input type="hidden" id="delete_id_cat" name="cat_id" value="">
+                            <input type="hidden" id="delete_cat_id" name="cat_id" value="">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
@@ -188,7 +194,7 @@
                 deleteModal.addEventListener('show.bs.modal', function (event) {
                     var button = event.relatedTarget; // Button that triggered the modal
                     var cat_Id = button.getAttribute('data-cat-id'); // Extract info from data-* attributes
-                    var modalInput = deleteModal.querySelector('#delete_id_cat'); // Find the input in the modal
+                    var modalInput = deleteModal.querySelector('#delete_cat_id'); // Find the input in the modal
                     modalInput.value = cat_Id; // Update the input's value
                 });
             });
@@ -530,18 +536,18 @@
                                                     if ($result_category->num_rows > 0) {
                                                         while ($row = $result_category->fetch_assoc()) {
                                                             echo "<tr class='text-center text-uppercase'>";
-                                                            echo "<td>" . $row["id"] . "</td>";
+                                                            echo "<td>" . $row["cat_id"] . "</td>";
                                                             echo "<td>" . $row["category_name"] . "</td>";
                                                             echo "<td>
                                                                     <button class='btn btn-primary btn-sm edit-btn'
-                                                                            data-id='" . $row["id"] . "'
+                                                                            data-id='" . $row["cat_id"] . "'
                                                                             data-cat='" . $row["category_name"] . "'
                                                                             data-bs-toggle='modal'
                                                                             data-bs-target='#modal_edit_cat'>
                                                                         EDIT
                                                                     </button>
                                                                     <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#modal_delete_cat'
-                                                                    data-cat-id='{$row['id']}'>DELETE</button>
+                                                                    data-cat-id='{$row['cat_id']}'>DELETE</button>
                                                                 </td>";
                                                             echo "</tr>";
                                                         }
@@ -585,18 +591,18 @@
                                                     if ($result_brand->num_rows > 0) {
                                                         while ($row = $result_brand->fetch_assoc()) {
                                                             echo "<tr class='text-center text-uppercase'>";
-                                                            echo "<td>" . $row["id"] . "</td>";
+                                                            echo "<td>" . $row["brand_id"] . "</td>";
                                                             echo "<td>" . $row["brand_name"] . "</td>";
                                                             echo "<td>
                                                                     <button class='btn btn-primary btn-sm edit-btn'
-                                                                        data-id='" . $row["id"] . "'
+                                                                        data-id='" . $row["brand_id"] . "'
                                                                         data-brand='" . $row["brand_name"] . "'
                                                                         data-bs-toggle='modal'
                                                                         data-bs-target='#modal_edit'>
                                                                         EDIT
                                                                     </button>
                                                                     <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#modal_delete_brand' 
-                                                                        data-brand-id='{$row['id']}'>DELETE</button>
+                                                                        data-brand-id='{$row['brand_id']}'>DELETE</button>
                                                                 </td>";
                                                             echo "</tr>";
                                                         }

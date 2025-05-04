@@ -1,5 +1,18 @@
 <?php 
 include 'db/dbconnect.php';
+
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+$sql = "SELECT c.category_name AS categories, b.brand_name AS brands, p.name, p.price, p.quantity 
+    FROM products p 
+    JOIN categories c ON p.cat_id = c.cat_id 
+    JOIN brands b ON p.brand_id = b.brand_id";
+
+    $result = $con->query($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

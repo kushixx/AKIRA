@@ -1,4 +1,43 @@
-<?php 
+<?php
+session_start();
+include 'db/db_con.php'; // Include your database connection file
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve username and password from the form
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Validate input
+    if (empty($username) || empty($password)) {
+        $error = "Please fill in all fields.";
+    } else {
+        // Prepare and execute the query
+        $stmt = $con->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            // Fetch user data
+            $user = $result->fetch_assoc();
+
+            // Store user data in session
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['firstname'] = $user['firstname'];
+            $_SESSION['lastname'] = $user['lastname'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['position'] = $user['position'];
+
+            // Redirect to the dashboard or home page
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = "Invalid username or password.";
+        }
+
+        $stmt->close();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,50 +65,47 @@
 
 <body class="bg-gradient-dark ">
 
-    <div class="container mt-5">
-
+<div class="container mt-5">
         <!-- Outer Row -->
         <div class="row justify-content-center">
-
             <div class="col-xl-6 col-lg-6 col-md-9">
-
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0 mt-5 mx-5" style="min-height: 600px;">
                         <!-- Nested Row within Card Body -->
                         <div class="row justify-content-center">
-                           <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>-->
                             <div class="col-lg-12 mt-5">
                                 <div class="p-5">
                                     <div class="text-center mb-5">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <?php if (isset($error)): ?>
+                                        <div class="alert alert-danger" role="alert">
+                                            <?php echo $error; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <form class="user" method="POST" action="">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="username" aria-describedby="emailHelp"
-                                                placeholder="Enter username...">
+                                                name="username" id="username" placeholder="Enter username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                name="password" id="exampleInputPassword" placeholder="Password">
                                         </div>
-                                        <a href="index.php" class="btn btn-primary btn-user btn-block mt-5 bg-gradient-dark ">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block mt-5 bg-gradient-dark">
                                             Login
-                                        </a>
+                                        </button>
                                         <hr>
                                     </form>
-                                
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -84,4 +120,3 @@
 </body>
 
 </html>
-
